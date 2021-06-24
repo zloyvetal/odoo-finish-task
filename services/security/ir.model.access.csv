@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+device_user,group_device_user,model_devices_model,base.group_user,1,1,1,1
+service_user,group_service_user,model_services_model,base.group_user,1,1,1,1
+service_to_device_user,group_service_to_device_user,model_device_to_services,base.group_user,1,1,1,1
+service_filter_report_user,group_filter_report_user,model_report_filter,base.group_user,1,1,1,1

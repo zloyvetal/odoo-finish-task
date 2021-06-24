@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="service_to_device_view_tree" model="ir.ui.view">
+        <field name="name">service_to_device_view_tree</field>
+        <field name="model">device.to.services</field>
+        <field name="arch" type="xml">
+            <tree editable="top"
+                  decoration-info="status == 'in_work'"
+                  decoration-success="status == 'ok'"
+                  decoration-muted="status == 'cancel'">
+                <field name="service_day"/>
+                <field name="device_id"/>
+                <field name="service_id"/>
+                <field name="status"/>
+                <field name="price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="service_view_tree" model="ir.ui.view">
+        <field name="name">service_view_tree</field>
+        <field name="model">services.model</field>
+        <field name="arch" type="xml">
+            <tree string="service_tree">
+                <field name="name"/>
+                <field name="price"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="service_view_form" model="ir.ui.view">
+        <field name="name">service_view_form</field>
+        <field name="model">services.model</field>
+        <field name="arch" type="xml">
+            <form string="service_form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="base_currency_id"/>
+                            <field name="price"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="service_to_device_action" model="ir.actions.act_window">
+        <field name="name">Main board</field>
+        <field name="res_model">device.to.services</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="action_services_id" model="ir.actions.act_window">
+        <field name="name">Services</field>
+        <field name="res_model">services.model</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Services" id="services_main_menu"/>
+    <menuitem name="Main" id="main_menu" parent="services_main_menu" action="service_to_device_action" sequence="1"/>
+    <menuitem name="Services" id="services_sub_menu" parent="services_main_menu" action="action_services_id"
+              sequence="3"/>
+
+</odoo>

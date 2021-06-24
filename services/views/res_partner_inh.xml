@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="clients_inherit_form_view" model="ir.ui.view">
+        <field name="name">Clients</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="device" string="Devices">
+                    <field name="device_ids"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="omo_client_action" model="ir.actions.act_window">
+        <field name="name">Clients</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem name="Clients" id="clients_menu" parent="services_main_menu" action="omo_client_action" sequence="4"/>
+
+</odoo>

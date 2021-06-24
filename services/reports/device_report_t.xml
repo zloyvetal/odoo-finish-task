@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- QWeb Reports -->
+    <report
+            id="report_device_t"
+            model="report.filter"
+            report_type="qweb-pdf"
+            string="PDF Report"
+            name="services.report_device_templates"
+            file="services.report_device_templates"
+    />
+
+    <template id="report_device_templates">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <h3>
+                        <center>Device PDF Report</center>
+                    </h3>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6">
+                            Date from:
+                            <span t-esc="datas['date_from']"/>
+                        </div>
+                        <div class="col-6">
+                            Device:
+                            <span t-esc="datas['device'].name"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            Date to:
+                            <span t-esc="datas['date_to']"/>
+                        </div>
+
+                    </div>
+                    <br/>
+
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Service name</th>
+                                <th>Date</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="counter" t-value="0"/>
+                            <t t-as="doc" t-foreach="docs">
+                                <td colspan="4">
+
+                                    <tr>
+                                        <t t-set="counter" t-value="counter + doc.service_id.price"/>
+
+                                        <td>
+                                            <span t-field="doc.service_id.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.service_day"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.service_id.price"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.status"/>
+                                        </td>
+
+                                    </tr>
+                                </td>
+
+                            </t>
+                        </tbody>
+                    </table>
+                    <h2>Total price:</h2>
+                    <p><t t-esc="counter"/></p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="filter_report_wizard" model="ir.ui.view">
+        <field name="name">Filter report</field>
+        <field name="model">report.filter</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="device_id"/>
+                </group>
+                <footer>
+                    <button type="object" class="btn btn-primary" name="print_report" string="Print"/>
+                    <button string="Cancel" class="btn-danger" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_report_wizard" model="ir.actions.act_window">
+        <field name="name">Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.filter</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="filter_report_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="pdf_menu" name="PDF Report" parent="services_main_menu" action="action_report_wizard" sequence="5"/>
+</odoo>
